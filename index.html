@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css ">
+    <link rel="stylesheet" href="utility.css">
+    <title>Spotify - Web Player: Music for everyone</title>
+</head>
+
+
+
+
+
+
+<body>
+    <!-- <img src="logo.svg" alt=""> -->
+    <div class="container flex bg-black">
+        <!-- left  -->
+        <div class="left  bg-black ">
+            <!-- home and logo -->
+            <div class="Home bg-gray rounded m-1 p-1">
+                <div class="logo"><img src="logo.svg" class="invert" alt="Spotify"></span> </div>
+                <ul>
+                    <li><img src="home.svg" class="invert" alt="Home">Home</li>
+                    <li><img src="search.svg" class="invert" alt="search">Search</li>
+                </ul>
+            </div>
+            <!-- library -->
+            <div class="library bg-gray rounded">
+
+                <!--  library svg and heading  -->
+                <div class="heading">
+                    <img src="playlist.svg" class="invert" alt="playlist">
+                    <h2>Your library</h2>
+                </div>
+
+                <!-- Song lIst  -->
+                <div class="songlist">
+                    <ul>
+
+
+                    </ul>
+                </div>
+                <div class="footer">
+                    <div><a href="https://www.spotify.com/jp/legal/"><span>Legal</span></a></div>
+                    <div><a href="https://www.spotify.com/jp/privacy/"><span>Privacy Center</span></a></div>
+                    <div><a href="https://www.spotify.com/jp/legal/privacy-policy/"><span>Privacy Policy</span></a>
+                    </div>
+                    <div><a href="https://www.spotify.com/jp/legal/cookies-policy/"><span>Cookies</span></a></div>
+                    <div><a href="https://www.spotify.com/jp/legal/privacy-policy/#s3"><span>About Ads</span></a></div>
+                    <div><a href="https://www.spotify.com/jp/accessibility/"><span>Accessibility</span></a></div>
+                </div>
+            </div>
+
+        </div>
+        <!--  right -->
+        <div class="right bg-gray rounded ">
+            <div class="header  ">
+                <div class="nav">
+                    <img src="left.svg" alt="">
+                    <img src="right.svg" alt="">
+                </div>
+                <div class="button">
+                    <button class="singupbutton">Sign up</button>
+                    <button class="loginbutton">Login</button>
+                </div>
+            </div>
+            <div class="spotifyplaylist">
+                <h1>Spotify Playlists</h1>
+                <div class="cardContainer">
+                    <div class="card">
+                        <div class="play_button">
+                            <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="40" fill="#1Ed760" />
+                                <polygon points="40,30 70,50 40,70" fill="black" />
+                            </svg>
+                        </div>
+                        <img src="playlist-img1.jpg" alt="">
+                        <h2>Finder Her</h2>
+                        <p>Sachin-jinger,Pritam,Atif Aslam and more</p>
+                    </div>
+                    <div class="card">
+                        <div class="play_button">
+                            <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="40" fill="#1Ed760" />
+                                <polygon points="40,30 70,50 40,70" fill="black" />
+                            </svg>
+                        </div>
+                        <img src="playlist-img1.jpg" alt="">
+                        <h2>Finder Her</h2>
+                        <p>Sachin-jinger,Pritam,Atif Aslam and more</p>
+                    </div>
+                </div>
+                <div class="PLaybar">
+
+
+                    <div class="seekbar">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="songinfo"></div>
+                    <div class="Songbuttons">
+                        <img src="privious.arrow.svg" alt="">
+                        <img src="play.svg" alt="">
+                        <img src="Next.svg" alt="">
+                    </div>
+                    <div class="songtime"></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
