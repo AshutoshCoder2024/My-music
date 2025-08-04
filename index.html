@@ -4,14 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css ">
-    <link rel="stylesheet" href="utility.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/utility.css">
     <title>Spotify - Web Player: Music for everyone</title>
 </head>
-
-
-
-
 
 
 <body>
@@ -19,12 +15,16 @@
     <div class="container flex bg-black">
         <!-- left  -->
         <div class="left  bg-black ">
+            <div>
+                <img class="invert close" src="img/close.svg">
+            </div>
             <!-- home and logo -->
             <div class="Home bg-gray rounded m-1 p-1">
-                <div class="logo"><img src="logo.svg" class="invert" alt="Spotify"></span> </div>
+                <div class="logo"><img src="img/logo.jpg" class="invert" alt="" style="width: 90px; height: 50px;">
+</span> </div>
                 <ul>
-                    <li><img src="home.svg" class="invert" alt="Home">Home</li>
-                    <li><img src="search.svg" class="invert" alt="search">Search</li>
+                    <li><img src="img/home.svg" class="invert" alt="Home">Home</li>
+                    <li><img src="img/search.svg" class="invert" alt="search">Search</li>
                 </ul>
             </div>
             <!-- library -->
@@ -32,10 +32,9 @@
 
                 <!--  library svg and heading  -->
                 <div class="heading">
-                    <img src="playlist.svg" class="invert" alt="playlist">
+                    <img src="img/playlist.svg" class="invert" alt="playlist">
                     <h2>Your library</h2>
                 </div>
-
                 <!-- Song lIst  -->
                 <div class="songlist">
                     <ul>
@@ -59,18 +58,23 @@
         <div class="right bg-gray rounded ">
             <div class="header  ">
                 <div class="nav">
-                    <img src="left.svg" alt="">
-                    <img src="right.svg" alt="">
+                    <div class="hamburgerContainer">
+                        <img width="30" class="invert hamburger" src="img/hamberger.svg">
+                        <img src="img/left.svg" alt="">
+                        <img src="img/right.svg" alt="">
+                    </div>
                 </div>
                 <div class="button">
-                    <button class="singupbutton">Sign up</button>
+                    <button class="signupbutton">Sign up</button>
                     <button class="loginbutton">Login</button>
                 </div>
             </div>
             <div class="spotifyplaylist">
                 <h1>Spotify Playlists</h1>
-                <div class="cardContainer">
-                    <div class="card">
+                <div class="cardContainer" style="display: flex ; gap: 29px">
+
+
+                    <!-- <div data-folder="cs" class="card">
                         <div class="play_button">
                             <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="50" cy="50" r="40" fill="#1Ed760" />
@@ -80,38 +84,41 @@
                         <img src="playlist-img1.jpg" alt="">
                         <h2>Finder Her</h2>
                         <p>Sachin-jinger,Pritam,Atif Aslam and more</p>
-                    </div>
-                    <div class="card">
-                        <div class="play_button">
-                            <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="40" fill="#1Ed760" />
-                                <polygon points="40,30 70,50 40,70" fill="black" />
-                            </svg>
-                        </div>
-                        <img src="playlist-img1.jpg" alt="">
-                        <h2>Finder Her</h2>
-                        <p>Sachin-jinger,Pritam,Atif Aslam and more</p>
-                    </div>
+                    </div> -->
+
+
                 </div>
                 <div class="PLaybar">
-
-
                     <div class="seekbar">
                         <div class="circle"></div>
                     </div>
-                    <div class="songinfo"></div>
-                    <div class="Songbuttons">
-                        <img src="privious.arrow.svg" alt="">
-                        <img src="play.svg" alt="">
-                        <img src="Next.svg" alt="">
+                    <div class="abovebar">
+                        <div class="Songinfo"></div>
+                        <div class="Songbuttons">
+                            <img width="35" id="pre" src="img/prevsong.svg" alt="">
+                            <img width="35" id="play" src="img/play.svg" alt="">
+                            <img width="35" id="next" src="img/next.svg" alt="">
+                        </div>
+                        <div class="timevol">
+
+                            <div class="Songtime"></div>
+                            <div class="volume">
+                                <img src="img/volume.svg">
+                                <div class="range">
+                                    <input type="range" class="range" name="volme ">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="songtime"></div>
+
                 </div>
             </div>
         </div>
-        
+
+
     </div>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
