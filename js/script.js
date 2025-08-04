@@ -10,7 +10,7 @@ async function getsongs(folder) {
   const Songinfo = await jsonresponse.json();
   console.log(Songinfo.title);
   let a = await fetch(
-    `http://127.0.0.1:5501/${currfolder}`
+    `/${currfolder}`
   );
   let response = await a.text();
 
@@ -99,7 +99,7 @@ function convertToMinSec(seconds) {
 //  display all the album on the page
 
 async function DisplayAlbums() {
-  let a = await fetch(`http://127.0.0.1:5501/Song/`);
+  let a = await fetch(`/Song/`);
   let response = await a.text();
 
   let div = document.createElement("div");
@@ -121,7 +121,7 @@ async function DisplayAlbums() {
     if (folder.toLowerCase() === "song") continue;
 
     try {
-      let res = await fetch(`http://127.0.0.1:5501/Song/${folder}/info.json`);
+      let res = await fetch(`/Song/${folder}/info.json`);
       if (!res.ok) {
         console.error(`Could not fetch info.json for folder: ${folder}`);
         continue;
