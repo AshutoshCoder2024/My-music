@@ -11,9 +11,14 @@
   font-family: "Roboto", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: black;
   color: white;
+  overflow-x: hidden;
 }
 
 .close {
@@ -160,6 +165,7 @@ body {
   flex-wrap: wrap;
   overflow-y: auto;
   max-height: 60vh;
+  scroll-behavior: smooth;
 }
 .card {
   width: 200px;
@@ -266,6 +272,7 @@ body {
   height: 544px;
   overflow: auto;
   margin-bottom: 44px;
+  scroll-behavior: smooth;
 }
 
 .songlist ul {
@@ -283,7 +290,16 @@ body {
   margin: 12px 0;
   padding: 13px;
   border-radius: 5px;
+  transition: all 0.3s ease;
 }
+
+.songlist ul li.active {
+  background-color: rgba(30, 215, 96, 0.1);
+  border-color: #1ed760;
+  transform: translateX(5px);
+}
+
+
 .songlist ul li img {
   color: white;
 }
@@ -402,17 +418,17 @@ body {
     flex-direction: column;
     gap: 13px;
   }
+  .lsbutton{
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+  }
   .right {
     width: 100vw;
     margin: 0;
   }
-  .PLaybar {
-    right: 25px;
-    width: calc(100vw - 75px);
-  }
-  .seekbar {
-    width: calc(100vw - 120px);
-  }
+ 
   .hamburger {
     display: block;
   }
@@ -429,11 +445,21 @@ body {
   .close {
     display: block;
   }
+  .PLaybar {
+    right: 25px;
+    width: calc(100vw - 75px);
+    bottom: 0;
+    height: 140px;
+  }
+  .seekbar {
+    width: calc(100vw - 120px);
+  }
   .abovebar {
     flex-direction: column;
-    gap: 23px;
+    gap: 12px;
     align-items: center;
   }
+  
 }
 
 @media (max-width: 500px) {
@@ -458,4 +484,77 @@ body {
   .left {
     width: 100vw;
   }
+
+  .PLaybar{
+    width: 93vw;
+    right: 2px;
+  }
+
+  .volume{
+    position: relative;
+    top: -10px;
+  }
+  
+  .Songbuttons img{
+    width: auto;
+    height: 27px;
+  }
+  
+  .range input {
+    height: 5px;
+    margin-bottom: 10px;
+  } 
+  
+  .seekbar{
+    width: 75vw;
+    margin-bottom: 11px;
+  }
+}
+
+/* For Webkit browsers (e.g., Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #222;
+  border-radius: 4px;
+}
+
+/* For Firefox */
+scrollbar-color: #555 #222;
+scrollbar-width: thin;
+
+/* Smooth transitions for all interactive elements */
+.card, .songlist ul li, .play_button, .Songbuttons img, .volume img {
+  transition: all 0.3s ease;
+}
+
+/* Hover effects for better interactivity */
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.songlist ul li:hover {
+  background-color: rgba(255,255,255,0.05);
+  transform: translateX(5px);
+}
+
+.Songbuttons img:hover {
+  transform: scale(1.1);
+}
+
+.volume img:hover {
+  transform: scale(1.1);
 }

@@ -29,9 +29,9 @@ async function getsongs(folder) {
   for (const song of songs) {
     songUl.innerHTML += `
       <li>
-        <img src="" class="invert" alt="">
+        <img src="img/music.svg" class="invert" alt="">
         <div class="info">
-          <div>${decodeURI(song)}</div>
+          <div>${decodeURI(song).replace('.mp3', '')}</div>
           <div style="margin-top: 5px;">${Songinfo.title}</div>
         </div>
         <div class="playnow">
@@ -40,17 +40,21 @@ async function getsongs(folder) {
         </div>
       </li>`;
   }
-// Attach an event listener to each song
- Array.from(
+
+  // Attach an event listener to each song
+  Array.from(
     document.querySelector(".songlist").getElementsByTagName("li")
   ).forEach((e) => {
     
     e.addEventListener("click", (element) => {
-   
       console.log(e.querySelector(".info").firstElementChild.innerHTML) // print all  song
-      playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
-      document.querySelector(".left").style.left = "-120%";
-
+      const songName = e.querySelector(".info").firstElementChild.innerHTML.trim();
+      // Find the original song filename to play
+      const songToPlay = songs.find(song => song.replace('.mp3', '') === songName);
+      if (songToPlay) {
+        playMusic(songToPlay);
+        document.querySelector(".left").style.left = "-120%";
+      }
     });
   });
   return songs;
@@ -58,6 +62,20 @@ async function getsongs(folder) {
 
 // play music
 const playMusic = (track, pause = false) => {
+  // Remove active class from all songs
+  document.querySelectorAll('.songlist ul li').forEach(li => {
+    li.classList.remove('active');
+  });
+  
+  // Add active class to current song
+  const songName = track.replace('.mp3', '');
+  const songElements = document.querySelectorAll('.songlist ul li');
+  songElements.forEach(li => {
+    if (li.querySelector('.info div').textContent === songName) {
+      li.classList.add('active');
+    }
+  });
+
   currentsong.src = `Song/${currfolder}/` + track;
 
   if (!pause) {
@@ -65,12 +83,27 @@ const playMusic = (track, pause = false) => {
     play.src = "img/pause.svg";
   }
 
-  document.querySelector(".Songinfo").innerHTML = decodeURI(track);
+  document.querySelector(".Songinfo").innerHTML = decodeURI(track).replace('.mp3', '');
   document.querySelector(".Songtime").innerHTML = `${convertToMinSec(
     currentsong.currentTime
   )}/${convertToMinSec(currentsong.duration)}`;
 };
 
+// Auto-play next song when current song ends
+currentsong.addEventListener("ended", () => {
+  // Find current song index
+  const currentIndex = songs.findIndex(song => 
+    song === currentsong.src.split("/").slice(-1)[0]
+  );
+  
+  // Play next song or loop to first song
+  if (currentIndex !== -1 && currentIndex < songs.length - 1) {
+    playMusic(songs[currentIndex + 1]);
+  } else if (songs.length > 0) {
+    // Loop to first song
+    playMusic(songs[0]);
+  }
+});
 
 
 // display all albums
@@ -162,18 +195,22 @@ async function main() {
   // Add an event to volume
   document.querySelector(".range input").addEventListener("change", (e) => {
     currentsong.volume = parseInt(e.target.value) / 100;
+    img.src = "img/volume.svg";
   });
 
 
+  const volumeRange = document.querySelector(".range input");
   // Add event listener to mute the track
   document.querySelector(".volume > img").addEventListener("click", (e) => {
     const img = e.target;
     if (img.src.includes("volume.svg")) {
-      img.src = "img/close.svg";
+      img.src = "img/mute.svg";
       currentsong.volume = 0;
+      volumeRange.value = 0; // set slider to 0
     } else {
       img.src = "img/volume.svg";
-      currentsong.volume = 0.1;
+      currentsong.volume = 0.7;
+      volumeRange.value = 70; // set slider back to 50%
     }
   });
 
