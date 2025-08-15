@@ -2,6 +2,14 @@ let songs;
 let currentsong = new Audio();
 let currfolder;
 
+// convert seconds to mm:ss
+function convertToMinSec(seconds) {
+  if (isNaN(seconds) || seconds < 0) return "00:00";
+  const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
+  const remaining = String(Math.floor(seconds % 60)).padStart(2, '0');
+  return `${minutes}:${remaining}`;
+}
+
 // for getting all the songs from a folder
 async function getsongs(folder) {
   currfolder = folder;
@@ -15,6 +23,7 @@ async function getsongs(folder) {
   const declaredTracks = Array.isArray(Songinfo.tracks) ? Songinfo.tracks : [];
   songs = declaredTracks.filter((name) => typeof name === "string" && name.toLowerCase().endsWith(".mp3"));
 
+    // Show all the songs in the playlist
   let songUl = document.querySelector(".songlist ul");
   songUl.innerHTML = "";
   for (const song of songs) {
@@ -31,7 +40,7 @@ async function getsongs(folder) {
         </div>
       </li>`;
   }
-
+// Attach an event listener to each song
  Array.from(
     document.querySelector(".songlist").getElementsByTagName("li")
   ).forEach((e) => {
@@ -40,6 +49,8 @@ async function getsongs(folder) {
    
       console.log(e.querySelector(".info").firstElementChild.innerHTML) // print all  song
       playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
+      document.querySelector(".left").style.left = "-120%";
+
     });
   });
   return songs;
@@ -60,13 +71,7 @@ const playMusic = (track, pause = false) => {
   )}/${convertToMinSec(currentsong.duration)}`;
 };
 
-// convert seconds to mm:ss
-function convertToMinSec(seconds) {
-  if (isNaN(seconds) || seconds < 0) return "00:00";
-  const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
-  const remaining = String(Math.floor(seconds % 60)).padStart(2, '0');
-  return `${minutes}:${remaining}`;
-}
+
 
 // display all albums
 async function DisplayAlbums() {
@@ -102,10 +107,12 @@ async function DisplayAlbums() {
     }
   }
 
+  // Load the playlist whenever card is clicked
   Array.from(document.getElementsByClassName("card")).forEach((e) => {
     e.addEventListener("click", async (item) => {
       songs = await getsongs(item.currentTarget.dataset.folder);
-      playMusic(songs[0]);
+      document.querySelector(".left").style.left = "0";
+
     });
   });
 }
@@ -113,8 +120,11 @@ async function DisplayAlbums() {
 async function main() {
   await getsongs(`1Honey-singh`);
   playMusic(songs[0], true);
+
+      // Display all the albums on the page
   DisplayAlbums();
 
+  // Add an event listener to play
   const play = document.getElementById("play");
   play.addEventListener("click", () => {
     if (currentsong.paused) {
@@ -126,6 +136,8 @@ async function main() {
     }
   });
 
+
+    // Add an event listener to previous
   pre.addEventListener("click", () => {
     currentsong.pause();
     let index = songs.indexOf(currentsong.src.split("/").slice(-1)[0]);
@@ -136,6 +148,7 @@ async function main() {
     }
   });
 
+   // Add an event listener to next
   next.addEventListener("click", () => {
     currentsong.pause();
     let index = songs.indexOf(currentsong.src.split("/").slice(-1)[0]);
@@ -146,10 +159,13 @@ async function main() {
     }
   });
 
+  // Add an event to volume
   document.querySelector(".range input").addEventListener("change", (e) => {
     currentsong.volume = parseInt(e.target.value) / 100;
   });
 
+
+  // Add event listener to mute the track
   document.querySelector(".volume > img").addEventListener("click", (e) => {
     const img = e.target;
     if (img.src.includes("volume.svg")) {
@@ -161,6 +177,7 @@ async function main() {
     }
   });
 
+  // Listen for timeupdate event
   currentsong.addEventListener("timeupdate", () => {
     document.querySelector(".Songtime").innerHTML = `${convertToMinSec(
       currentsong.currentTime
@@ -173,16 +190,19 @@ async function main() {
     }
   });
 
+      // Add an event listener to seekbar
   document.querySelector(".seekbar").addEventListener("click", (e) => {
     const percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
     document.querySelector(".circle").style.left = percent + "%";
     currentsong.currentTime = (currentsong.duration * percent) / 100;
   });
 
+   // Add an event listener for hamburger
   document.querySelector(".hamburger").addEventListener("click", () => {
     document.querySelector(".left").style.left = "0";
   });
 
+      // Add an event listener for close button
   document.querySelector(".close").addEventListener("click", () => {
     document.querySelector(".left").style.left = "-120%";
   });
