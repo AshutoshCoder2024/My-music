@@ -1,4 +1,13 @@
 {
   "title": "Arijit Singh",
-  "description": "Best soulful hits by Arijit Singh."
+  "description": "Best soulful hits by Arijit Singh.",
+  "tracks": [
+    "Agar-Tum.mp3",
+    "Enna-Sona.mp3",
+    "kaise-hua.mp3",
+    "Kesariya.mp3",
+    "Raabta.mp3",
+    "Tujhe-Kitna.mp3"
+  ]
 }
+

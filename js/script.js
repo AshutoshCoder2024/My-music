@@ -7,24 +7,13 @@ async function getsongs(folder) {
   currfolder = folder;
   const infoFilePath = `Song/${folder}/info.json`;
   const jsonresponse = await fetch(infoFilePath);
+  if (!jsonresponse.ok) throw new Error(`Missing info.json for ${folder}`);
   const Songinfo = await jsonresponse.json();
   console.log(Songinfo.title);
 
-  let a = await fetch(`Song/${currfolder}`);
-  let response = await a.text();
-
-  const div = document.createElement("div");
-  div.innerHTML = response;
-
-  let as = div.getElementsByTagName("a");
-
-  songs = [];
-  for (let index = 0; index < as.length; index++) {
-    const element = as[index];
-    if (element.href.endsWith(".mp3")) {
-      songs.push(element.href.split(`/${currfolder}/`)[1]);
-    }
-  }
+  // Build song list from JSON manifest to work on hosts without directory listing
+  const declaredTracks = Array.isArray(Songinfo.tracks) ? Songinfo.tracks : [];
+  songs = declaredTracks.filter((name) => typeof name === "string" && name.toLowerCase().endsWith(".mp3"));
 
   let songUl = document.querySelector(".songlist ul");
   songUl.innerHTML = "";
@@ -33,7 +22,7 @@ async function getsongs(folder) {
       <li>
         <img src="" class="invert" alt="">
         <div class="info">
-          <div>${song.replaceAll("%20", "")}</div>
+          <div>${decodeURI(song)}</div>
           <div style="margin-top: 5px;">${Songinfo.title}</div>
         </div>
         <div class="playnow">
@@ -81,21 +70,16 @@ function convertToMinSec(seconds) {
 
 // display all albums
 async function DisplayAlbums() {
-  let a = await fetch(`Song/`);
-  let response = await a.text();
+  const manifestResponse = await fetch("Song/albums.json");
+  if (!manifestResponse.ok) {
+    console.error("Missing Song/albums.json manifest");
+    return;
+  }
+  const manifest = await manifestResponse.json();
+  const albumFolders = Array.isArray(manifest.albums) ? manifest.albums : [];
 
-  let div = document.createElement("div");
-  div.innerHTML = response;
-
-  let anchors = div.getElementsByTagName("a");
   let cardContainer = document.querySelector(".cardContainer");
-
-  let array = Array.from(anchors);
-  for (let index = 0; index < array.length; index++) {
-    const e = array[index];
-    let folder = e.href.split("/").filter(Boolean).pop();
-    if (folder.toLowerCase() === "song") continue;
-
+  for (const folder of albumFolders) {
     try {
       let res = await fetch(`Song/${folder}/info.json`);
       if (!res.ok) continue;
