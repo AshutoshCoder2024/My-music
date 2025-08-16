@@ -404,7 +404,9 @@ body {
   .Songtime {
     width: auto;
   }
-
+.songlist {
+  height: 480px;
+}
   .left .close {
     position: absolute;
     right: 31px;

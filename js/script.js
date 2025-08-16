@@ -14,6 +14,7 @@ function convertToMinSec(seconds) {
 async function getsongs(folder) {
   currfolder = folder;
   const infoFilePath = `Song/${folder}/info.json`;
+  // const cover = `Song/${folder}/cover.jpg`;
   const jsonresponse = await fetch(infoFilePath);
   if (!jsonresponse.ok) throw new Error(`Missing info.json for ${folder}`);
   const Songinfo = await jsonresponse.json();
@@ -29,7 +30,8 @@ async function getsongs(folder) {
   for (const song of songs) {
     songUl.innerHTML += `
       <li>
-        <img src="img/music.svg" class="invert" alt="">
+        <img src="Song/${folder}/cover.jpg" alt="cover" style="width:50px; height:50px;">
+
         <div class="info">
           <div>${decodeURI(song).replace('.mp3', '')}</div>
           <div style="margin-top: 5px;">${Songinfo.title}</div>
