@@ -93,7 +93,8 @@ my-music/
 - Colors and themes can be modified in CSS variables
 
 ## 📸 Screenshots
-<img width="1837" height="1047" alt="image" src="https://github.com/user-attachments/assets/c7901027-75b7-4894-ab95-83c7496aba77" />
+<img width="1811" height="1017" alt="image" src="https://github.com/user-attachments/assets/04a5fa60-c916-43dc-851e-a8fc078c7fe3" />
+
 
 *The sleek and modern interface of My Music Player*
 
