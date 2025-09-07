@@ -30,7 +30,7 @@ async function getsongs(folder) {
   for (const song of songs) {
     songUl.innerHTML += `
       <li>
-        <img src="Song/${folder}/cover.jpg" alt="cover" style="width:50px; height:50px;">
+        <img src="Song/${folder}/cover.jpg" alt="cover" style="width:50px; height:50px; border-radius:5px;">
 
         <div class="info">
           <div>${decodeURI(song).replace('.mp3', '')}</div>
