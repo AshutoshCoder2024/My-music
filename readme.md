@@ -2,6 +2,8 @@
 
 A modern, responsive web music player built with pure HTML, CSS, and JavaScript. Experience seamless music streaming with a sleek interface that lets you explore albums, and enjoy your favorite tracks with style! 🎧
 
+
+
 ## ✨ Key Features
 
 ### Music Controls 🎮
@@ -91,7 +93,9 @@ my-music/
 - Colors and themes can be modified in CSS variables
 
 ## 📸 Screenshots
-![App Screenshot](img/image.png)
+<img width="1811" height="1017" alt="image" src="https://github.com/user-attachments/assets/04a5fa60-c916-43dc-851e-a8fc078c7fe3" />
+
+
 *The sleek and modern interface of My Music Player*
 
 ## 👥 Contributing
